@@ -1,66 +1,57 @@
+PGraphics pg;
+
 import gifAnimation.*;
 GifMaker gifExport;
 
 int boxSize = 50; // pixels
-int boxedPoints = 10;
 
-BoxedPoint[] points = new BoxedPoint[boxedPoints];
+// GENERATIVE VARIABLES
+float boxBoundryRatioMin = 0.3;
+float boxBoundryRatioMax = 1.2;
+
+int boxedPointsMin = 4;
+int boxedPointsMax = 20;
+
+Box[] boxes;
+int boxesCount;
 
 int framesCount;
+int frameSkip = 2;
 
 void setup() {
   pixelDensity(1);
   frameRate(10);
-  size(500, 500, P2D);
+  size(400, 400, P2D);
+  background(42,51,54);
   smooth(8);
 
   gifExport = new GifMaker(this, "export.gif");
   gifExport.setRepeat(0);
-  gifExport.setQuality(5);
+  gifExport.setQuality(2);
 
-  for (int i = 0; i < points.length; i++) {
-    points[i] = new BoxedPoint(boxSize, 1.1);
+  boxesCount = int(sq(width/boxSize));
+  boxes = new Box[boxesCount];
+
+  for (int i = 0; i < boxes.length; i++) {
+    int pointsNum = int(random(boxedPointsMin, boxedPointsMax));
+    float boxRatio = random(boxBoundryRatioMin, boxBoundryRatioMax);
+    boxes[i] = new Box(boxSize, pointsNum, boxRatio);
   }
 }
 
 void draw () {
-
-  background(42,51,54);
+  fill(42,51,54,70);
+  rect(0,0,width,height);
   stroke(247,248,251);
-  noFill();
 
-  for (int i = 0; i <= height/boxSize; i++) {
-    for (int j = 0; j <= width/boxSize; j++) {
-      // start from outside boundries
-      float relativeX = i * boxSize - boxSize;
-      float relativeY = j * boxSize - boxSize;
-
-      for (int w = 0; w < points.length; w++) {
-
-        if (w == 0) {
-          // connect the first point to the edge of the box
-          points[w].x = 0;
-          points[w].speedX = 0;
-        }
-
-        if (w == points.length-1) {
-          points[w].speedX = 0;
-          // connect it to the first point of the next box
-          line(relativeX + points[w].x, relativeY + points[w].y, relativeX + points[0].x + boxSize, relativeY + points[0].y);
-        } else {
-          line(relativeX + points[w].x, relativeY + points[w].y, relativeX + points[w+1].x, relativeY + points[w+1].y);
-        }
-      }
-      for (int w = 0; w < points.length; w++) {
-        points[w].update();
-      }
+  for (int i = 0; i < sqrt(boxesCount); i++) {
+    for (int j = 0; j < sqrt(boxesCount); j++) {
+      int index = (i+1)*(j+1)-1;
+      boxes[index].draw(i*boxSize,j*boxSize);
     }
   }
 
   framesCount++;
-
-  // textSize(10);
-  // text("Frame rate: " + int(frameRate), 10, height - 15);
 
   gifExport.setDelay(1);
   gifExport.addFrame();
