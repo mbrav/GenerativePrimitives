@@ -1,6 +1,6 @@
-// Lines #2
+// Lines #3
 // by Michael Braverman
-// July 3th, 2016
+// July 4th, 2016
 
 import gifAnimation.*;
 GifMaker gifExport;
@@ -8,11 +8,11 @@ GifMaker gifExport;
 int boxSize = 50; // pixels
 
 // GENERATIVE VARIABLES
-float boxBoundryRatioMin = 0.3;
-float boxBoundryRatioMax = 1.2;
+float boxBoundryRatioMin = 0.6;
+float boxBoundryRatioMax = 1.4;
 
 int boxedPointsMin = 4;
-int boxedPointsMax = 20;
+int boxedPointsMax = 5;
 
 Box[] boxes;
 int boxesCount;
@@ -22,8 +22,8 @@ int frameSkip = 2;
 
 void setup() {
   pixelDensity(1);
-  frameRate(10);
-  size(400, 400, P2D);
+  frameRate(60);
+  size(500, 500, P2D);
   background(42,51,54);
   smooth(8);
 
@@ -42,7 +42,7 @@ void setup() {
 }
 
 void draw () {
-  fill(42,51,54,70);
+  fill(42,51,54,100);
   rect(0,0,width,height);
   stroke(247,248,251);
 
@@ -58,7 +58,7 @@ void draw () {
   gifExport.setDelay(1);
   gifExport.addFrame();
 
-  if (framesCount == 30) {
+  if (framesCount == 50) {
     gifExport.finish();
     println("gif saved");
   }

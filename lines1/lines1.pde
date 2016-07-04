@@ -1,3 +1,7 @@
+// Lines #1
+// by Michael Braverman
+// July 2nd, 2016
+
 import gifAnimation.*;
 GifMaker gifExport;
 
