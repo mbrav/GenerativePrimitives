@@ -1,24 +1,26 @@
-// Lines #3
+// Lines #4 - The Settlement
 // by Michael Braverman
-// July 4th, 2016
+// July 5th, 2016
 
 import gifAnimation.*;
 GifMaker gifExport;
 
-int boxSize = 50; // pixels
+int boxSize =25; // pixels
 
 // GENERATIVE VARIABLES
 float boxBoundryRatioMin = 0.6;
-float boxBoundryRatioMax = 1.4;
+float boxBoundryRatioMax = 1.8;
 
-int boxedPointsMin = 4;
-int boxedPointsMax = 5;
+int boxedPointsMin = 2;
+int boxedPointsMax = 6;
 
 Box[] boxes;
 int boxesCount;
 
+float cosineAdd;
+
 int framesCount;
-int frameSkip = 3;
+int frameSkip = 2;
 
 void setup() {
   pixelDensity(1);
@@ -29,7 +31,7 @@ void setup() {
 
   gifExport = new GifMaker(this, "export.gif");
   gifExport.setRepeat(0);
-  gifExport.setQuality(0);
+  gifExport.setQuality(2);
 
   boxesCount = int(sq(width/boxSize));
   boxes = new Box[boxesCount];
@@ -42,14 +44,17 @@ void setup() {
 }
 
 void draw () {
-  fill(42,51,54,70);
+  fill(42,51,54,100);
   rect(0,0,width,height);
   stroke(247,248,251);
 
+  cosineAdd += 0.012;
+
   for (int i = 0; i < sqrt(boxesCount); i++) {
     for (int j = 0; j < sqrt(boxesCount); j++) {
+
       int index = (i+1)*(j+1)-1;
-      boxes[index].draw(i*boxSize,j*boxSize);
+      boxes[index].draw(i*boxSize,j*boxSize, cos(cosineAdd*5));
     }
   }
 

@@ -1,4 +1,4 @@
-// Lines #3
+// Lines #3 - - Individ’s Boundries
 // by Michael Braverman
 // July 4th, 2016
 

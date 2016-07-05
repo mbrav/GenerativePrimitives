@@ -4,24 +4,32 @@ class BoxedPoint {
   PVector pos;
   PVector speed;
 
-  BoxedPoint(float bSize, float boundryRatio) {
+  float speedChange;
+
+ BoxedPoint(float bSize, float boundryRatio) {
     boxSize = bSize*boundryRatio;
     pos = new PVector(random(0, boxSize), random(0, boxSize));
-    speed = new PVector(random(0.1, 0.5), random(0.1, 0.5));
+    speed = new PVector(1, 2);
+    speedChange = 1.0;
   }
 
   void update() {
-    pos.x += speed.x;
-    pos.y += speed.y;
+    pos.x += speed.x * speedChange;
+    pos.y += speed.y * speedChange;
 
     if (pos.x >= boxSize || pos.x <= 0) {
-      pos.x += -speed.x;
-      speed.x = -speed.x;
+      pos.x += -speed.x * speedChange;
+      speed.x = -speed.x * speedChange;
     }
     if (pos.y >= boxSize || pos.y <= 0) {
-      pos.y += -speed.y;
-      speed.y = -speed.y;
+      pos.y += -speed.y * speedChange;
+      speed.y = -speed.y * speedChange;
     }
+  }
+
+  // 1.0 is default speed
+  void changeSpeed(float multiplier) {
+    speedChange = multiplier;
   }
 }
 
@@ -39,7 +47,7 @@ class Box {
     }
   }
 
-  void draw(float x, float y) {
+  void draw(float x, float y, float speedAdjust) {
     // cross for centering
     // line(x + boxSize/2, y, x + boxSize/2, y + boxSize);
     // line(x, y + boxSize/2, x + boxSize, y + boxSize/2);
@@ -56,6 +64,7 @@ class Box {
       }
     }
     for (int w = 0; w < points.length; w++) {
+      points[w].changeSpeed(speedAdjust);
       points[w].update();
     }
   }
