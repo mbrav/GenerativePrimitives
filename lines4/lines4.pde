@@ -25,13 +25,13 @@ int frameSkip = 2;
 void setup() {
   pixelDensity(1);
   frameRate(60);
-  size(400, 400, P2D);
+  size(350, 350, P2D);
   background(42,51,54);
   smooth(8);
 
   gifExport = new GifMaker(this, "export.gif");
   gifExport.setRepeat(0);
-  gifExport.setQuality(2);
+  gifExport.setQuality(0);
 
   boxesCount = int(sq(width/boxSize));
   boxes = new Box[boxesCount];
@@ -48,7 +48,7 @@ void draw () {
   rect(0,0,width,height);
   stroke(247,248,251);
 
-  cosineAdd += 0.012;
+  cosineAdd += 0.013;
 
   for (int i = 0; i < sqrt(boxesCount); i++) {
     for (int j = 0; j < sqrt(boxesCount); j++) {
