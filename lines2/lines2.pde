@@ -17,6 +17,8 @@ int boxedPointsMax = 20;
 Box[] boxes;
 int boxesCount;
 
+int framesCount;
+
 void setup() {
   pixelDensity(1);
   frameRate(10);
