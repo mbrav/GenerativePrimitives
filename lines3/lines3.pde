@@ -2,6 +2,10 @@
 // by Michael Braverman
 // July 4th, 2016
 
+// DEPENDENCIES:
+// Make sure you have the following Processing 3 libraries installed:
+// GifAnimation: https://github.com/01010101/GifAnimation/
+
 import gifAnimation.*;
 GifMaker gifExport;
 

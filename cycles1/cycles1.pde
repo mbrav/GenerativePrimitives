@@ -6,6 +6,10 @@
 // by Michael Braverman
 // July 7th, 2016
 
+// DEPENDENCIES:
+// Make sure you have the following Processing 3 libraries installed:
+// GifAnimation: https://github.com/01010101/GifAnimation/
+
 import gifAnimation.*;
 GifMaker gifExport;
 
@@ -42,7 +46,7 @@ void setup() {
 }
 
 void draw () {
-  float frames = 60; 
+  float frames = 60;
   float add = 0.08;
 
   if (framesCount >= frames/2) {
