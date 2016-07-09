@@ -25,7 +25,6 @@ class Fractal {
     randomizeFractal();
   }
 
-
   // draw the Fractal
   void draw() {
     render(true);

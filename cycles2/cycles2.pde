@@ -69,13 +69,18 @@ void draw () {
 void gifFrame(){
   // count frames
   framesCount++;
+  print("Frame ");
+  println(framesCount);
+
   // gif control
   if (frames >= framesCount) {
     gifExport.setDelay(1);
     gifExport.addFrame();
     if (framesCount == frames) {
       gifExport.finish();
-      println("gif saved");
+      println("GIF saved");
+      println("exiting program...");
+      exit();
     }
   }
 }
